@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700|Open+Sans:400,600,700" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="header__logo"></div>
+			<ul class="header__menu menu">
+				<li class="menu__item">
+					<a class="menu__link" href="#">Name</a>
+				</li>
+				<li class="menu__item">
+					<a class="menu__link" href="#">Log out</a>
+				</li>
+			</ul>
+		</div>
+		<span class="header__nav">/<a class="header__link" href="#">Optical physic</a></span>
+		<div class="header__search">
+		</div>
+	</header>
+	<main class="main">
+		<div class="container">
+			<div class="main__info">
+				<img class="main__license" src="img/license.png" alt="">
+				<span class="main__date">20 march 2014</span>
+			</div>
+			<h1 class="main__caption">Emerging issues in radiogenic cataracts and cardiovascular disease</h1>
+			<span class="main__author">Titus Cieslewski</span>
+			<span class="main__position"> PhD Astro Physics, University of Texas</span>
+			<div class="main__sponsors">
+				<div class="main__sponsors-container">
+					<span class="main__sponsoredby">sponcored by:</span>
+					<span class="main__names">Min Zhu, Jiaming Yu, Oliver Tadeski.</span>
+				</div>
+				<div class="main__funding">fund this</div>
+			</div>
+			<div class="main__article article">
+				<p class="article__text article__text_bold">
+					In this paper, we discuss the adaptation of our decentralized place recognition method described in [1] to fullimage descriptors. As we had shown, the key to making a scalable decentralized visual place recognition lies in exploting deterministic key assignment in a distributed key-value map. Through this, it is possible to reduce bandwidth by up to a factor of n, the robot count, by casting visual place recognition to a key-value lookup problem. In [1], we exploited this for the bagof-words method [3], [4]. Our method of casting bag-of-words, however, results in a complex decentralized system, which has inherently worse recall than its centralized counterpart. In this paper, we instead start from the recent full-image description method NetVLAD [5]. As we show, casting this to a key-value lookup problem can be achieved with k-means clustering, and results in a much simpler system than [1]. The resulting system still has some flaws, albeit of a completely different nature: it suffers when the environment seen during deployment lies in a different distribution in feature space than the environment seen during training.
+				</p>
+				<h2 class="article__caption">I. Introduction</h2>
+				<p class="article__text">
+					Over the past three plus decades, the International Commission on Radiological Protection (ICRP) has classified radiation effects into tissue reactions (previously called non-stochastic or deterministic effects) and stochastic effects [1]. By definition, tissue reactions result from injury to populations of cells, and are characterized by a threshold below which no effect would occur. Typical examples are cataracts and non-cancer skin changes, the severity of which increases with dose [2]. In contrast, injury to a single cell or small number of cells is supposed to cause stochastic effects, and its probability but not severity is regarded as a linear-non-threshold (LNT) function of dose. Stochastic effects comprise cancer and heritable effects due to somatic cell mutations and germ cell mutations, respectively [2]. In the context of radiation rotection (RP), equivalent dose limits aim to prevent tissue reactions, whereas effective dose limits aim to reduce the risks of stochastic effects to the extent reasonably achievable [2]. Human radiation cataracts appeared in the literature as far back as 1903 [3], but atomic-bomb (A-bomb) and cyclotron cataracts observed in the late 1940s created a surge of interest in RP of the ocular lens [4, 5]. The ICRP listed cataracts as a radiation health hazard in 1950 [6] and recommended the first dose limit for the lens in 1954 [7]. The belief that cataracts result from a tissue reaction with a threshold dates back to 1969 [8], and the occupational dose limit recommended for the past few decades was calculated as a chronic dose threshold for vision-impairing cataract (VIC). 
+				</p>
+				<p class="article__text">
+					In [1], we have shown how the data exchange incurred in decentralized visual place recognition can be reduced by a factor of up to n, the robot count. This can be achieved by casting the place recognition problem to a keyvalue lookup problem, which can be efficiently distributed using deterministic key-to-peer assignment, as is for example common in distributed hash tables [6], [7]. In [1], we have thus cast the bag-of-words (BoW) place recognition method [3], [4] used in [8], [9]. In broad strokes, this is how the resulting method works:
+				</p>
+				<ol class="article__list" type='1'>
+					<li class="article__item">Before deployment, deterministically assign words of the visual vocabulary to the different robots. </li>
+					<li class="article__item">When querying place recognition of an image frame, calculate the BoW vector and split it up into partial BoW vectors such that one partial BoW vector can be sent to each robot r, containing the coefficients of the words assigend to r.</li>
+					<li class="article__item">The robots receive and process each their own partial query, returning the identity of the single frame which best matches the query frame according to the partial BoW vector. They also store the query, making it available as a result for subsequent queries.</li>
+					<li class="article__item">Gather all partial results and determine which frame is most consistently returned as result.</li>
+				</ol>
+				<div class="article__container">
+					<img class="article__img" src="img/robot-count.png" alt="">
+					<div class="article__img-descript">
+						<p class="article__img-descript-text">
+							<span class="article__img-descript-text article__img-descript-text__bold">Fig. 3. </span>Relative AUC (decentralized to centralized) and worst balance ratio of our method for different robot counts. The worst balance ratio is the ratio of the busy-ness of the most queried robot compared to what it would be if the feature-to-cluster assignments were perfectly balanced. Results are averaged over 10 runs and dots indicate the results of the individual runs.
+						</p>
+					</div>
+				</div>
+				<p class="article__text">
+					We have shown that this methods results in a bandwidth reductionof up to n (depending on the network infrastructure), while reducing recall by 10 − 20% depending on the robot count. A lot of the recall reduction is due to steps 3) and 4) of the method, which are based on a simplifying assumption that we do not yet fully understand. See Sec. IV C. and Fig.4 of [1] for a detialed discussion.
+				</p>
+				<h2 class="article__caption">III. Experiments</h2>
+				<p class="article__text">
+					In this whitepaper, we instead propose to use a full-image descriptor place recognition method as a basis. In particular, we use the recent, deep-learning based NetVLAD method
+[5] which has been shown to perform excellently even under severe appearance and viewpoint changes. Indeed, as can be seen in the centralized evaluation of this method (Fig. 1), its recall qualitatively looks better than the one of the BoW method we used in [1]. NetVLAD uses a deep neural network to calculate a low-dimensional feature vector ~v ∈ R d from an input image. Place matches can then be found by looking for the nearest vectors of other images according to the `2 distance.
+				</p>
+				<div class="article__container">
+					<img class="article__img" src="img/recall.png" alt="">
+					<div class="article__img-descript">
+						<p class="article__img-descript-text">
+							<span class="article__img-descript-text article__img-descript-text__bold">Fig. 2. </span>We evaluate the place recognition performance using the areaunder-curve measure (AUC) of the precision-recall curve, since we don’t apply geometric verification. As we can see, NetVLAD exhibits excellent precision for the most part. We furthermore see how the clustering of the decentralized method results in reduced recall. 
+						</p>
+					</div>
+				</div>
+				<p class="article__text">
+					Since this is preliminary work, we use a simpler evaluation methodology than the one in [1]: firstly, we don’t actully implement the method on multiple processes as we did there.
+It is evident form the method that it needs n times less data exchange than if all queries were sent to all robots.
+To evaluate the place recognition performance the method would have if deployed on a group of robots, we simply exclude all images that are not in the same cluster as the query from the pool of possible responses to a query.
+Secondly, we don’t perform geometric verification. To
+keep a fair evaluation, we evaluate precision 
+				</p>
+				<p class="article__text">
+					Since this is preliminary work, we use a simpler evaluation methodology than the one in [1]: firstly, we don’t actully implement the method on multiple processes as we did there. It is evident form the method that it needs n times less data exchange than if all queries were sent to all robots.
+				</p>
+				<p class="article__text">
+				To evaluate the place recognition performance the method would have if deployed on a group of robots, we simply exclude all images that are not in the same cluster as the query from the pool of possible responses to a query.
+Secondly, we don’t perform geometric verification. To keep a fair evaluation, we evaluate precision and recall for all possible feature vector distance thresholds and consider the area under that curve (AUC) as metric for place recognition performance, see Fig. 2. We use then NetVLAD feature vector dimension d = 128 (tunable thanks to a final layer that does principal component analysis). The method is evaluated on KITTI 00 [11] by splitting the sequence into n subsequences, one per robot.
+				</p>
+				<div class="article__container">
+					<img class="article__img" src="img/table.png" alt="">
+					<div class="article__img-descript">
+						<p class="article__img-descript-text">
+							<span class="article__img-descript-text article__img-descript-text__bold">Fig. 2. </span> We evaluate the place recognition performance using the areaunder-curve measure (AUC) of the precision-recall curve, since we don’t apply geometric verification. As we can see, NetVLAD exhibits excellent precision for the most part. We furthermore see how the clustering of the decentralized method results in reduced recall. 
+						</p>
+					</div>
+				</div>
+				<div class="article__container">
+					<img class="article__img" src="img/pic1.png" alt="">
+					<div class="article__img-descript">
+						<p class="article__img-descript-text">
+							<span class="article__img-descript-text article__img-descript-text__bold">Pic. 1. </span> We evaluate the place recognition performance using the areaunder-curve measure (AUC) of the precision-recall curve, since we don’t apply geometric verification. As we can see, NetVLAD exhibits excellent precision for the most part. We furthermore see how the clustering of the decentralized method results.
+						</p>
+					</div>
+				</div>
+				<h2 class="article__caption">II. Methodology</h2>
+				<p class="article__text">
+					Since this is preliminary work, we use a simpler evaluation methodology than the one in [1]: firstly, we don’t actully implement the method on multiple processes as we did there. It is evident form the method that it needs n times less data exchange than if all queries were sent to all robots. To evaluate the place recognition performance the method would have if deployed on a group of robots, we simply exclude all images that are not in the same cluster as the query from the pool of possible responses to a query. Secondly, we don’t perform geometric verification. To keep a fair evaluation, we evaluate precision and recall for all possible feature vector distance thresholds and consider the area under that curve (AUC) as metric for place recognition performance, see Fig. 2. We use then NetVLAD feature vector dimension d = 128 (tunable thanks to a final layer that does principal component analysis). The method is evaluated on KITTI 00 [11] by splitting the sequence into n subsequences, one per robot.
+				</p>
+			</div>
+			<div class="main__sponsors">
+				<img class="main__license" src="img/license.png" alt="">
+				<div class="main__funding">fund this</div>
+			</div>
+			<div class="main__references references">
+				<h3 class="references__caption">References</h3>
+				<ol class="references__list" type="1">
+					<li class="references__item">Cox JC, Coulter AR. Adjuvants--a classification and review of their modes of action. Vaccine 1997; 15:248-56; PMID:9139482; http://dx.doi.
+org/10.1016/S0264-410X(96)00183-1</li>
+					<li class="references__item">Harandi AM, Davies G, Olesen OF. Vaccine adjuvants:scientific challenges and strategic initiatives. ExpertRev Vaccines 2009; 8:293-8; PMID:19249971;http://dx.doi.org/10.1586/14760584.8.3.293</li>
+					<li class="references__item">Leroux-Roels G. Unmet needs in modern vaccinology:adjuvants to improve the immune response. Vaccine 2010; 28(Suppl 3):C25-36; PMID:20713254;http://dx.doi.org/10.1016/j.vaccine.2010.07.021</li>
+					<li class="references__item">Perrie Y, Mohammed AR, Kirby DJ, McNeil SE, Bramwell VW. Vaccine adjuvant systems: enhancing the efficacy of sub-unit protein antigens. Int J Pharm 2008; 364:272-80; PMID:18555624; http://dx.doi. org/10.1016/j.ijpharm.2008.04.036</li>
+					<li class="references__item">Cox JC, Coulter AR. Adjuvants--a classification and review of their modes of action. Vaccine 1997; 15:248-56; PMID:9139482; http://dx.doi.
+org/10.1016/S0264-410X(96)00183-1</li>
+					<li class="references__item">Harandi AM, Davies G, Olesen OF. Vaccine adjuvants:scientific challenges and strategic initiatives. ExpertRev Vaccines 2009; 8:293-8; PMID:19249971;http://dx.doi.org/10.1586/14760584.8.3.293</li>
+					<li class="references__item">Leroux-Roels G. Unmet needs in modern vaccinology:adjuvants to improve the immune response. Vaccine 2010; 28(Suppl 3):C25-36; PMID:20713254;http://dx.doi.org/10.1016/j.vaccine.2010.07.021</li>
+					<li class="references__item">Perrie Y, Mohammed AR, Kirby DJ, McNeil SE, Bramwell VW. Vaccine adjuvant systems: enhancing the efficacy of sub-unit protein antigens. Int J Pharm 2008; 364:272-80; PMID:18555624; http://dx.doi. org/10.1016/j.ijpharm.2008.04.036</li>
+				</ol>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
